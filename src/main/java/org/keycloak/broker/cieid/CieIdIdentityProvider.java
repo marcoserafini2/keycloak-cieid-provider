@@ -17,6 +17,7 @@
 package org.keycloak.broker.cieid;
 
 import org.jboss.logging.Logger;
+import org.keycloack.broker.cieid.logging.LogCollector;
 import org.keycloak.broker.provider.AbstractIdentityProvider;
 import org.keycloak.broker.provider.AuthenticationRequest;
 import org.keycloak.broker.provider.BrokeredIdentityContext;
@@ -217,10 +218,13 @@ public class CieIdIdentityProvider extends AbstractIdentityProvider<CieIdIdentit
             // Save the current RequestID in the Auth Session as we need to verify it against the ID returned from the IdP
             request.getAuthenticationSession().setClientNote(SamlProtocol.SAML_REQUEST_ID_BROKER, authnRequest.getID());
 
+            Document document = authnRequestBuilder.toDocument();
+    		LogCollector.logDocument(document);
+    		
             if (postBinding) {
-                return binding.postBinding(authnRequestBuilder.toDocument()).request(destinationUrl);
+                return binding.postBinding(document).request(destinationUrl);
             } else {
-                return binding.redirectBinding(authnRequestBuilder.toDocument()).request(destinationUrl);
+                return binding.redirectBinding(document).request(destinationUrl);
             }
         } catch (Exception e) {
             throw new IdentityBrokerException("Could not create authentication request.", e);

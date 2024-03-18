@@ -21,6 +21,7 @@ import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
+import org.keycloack.broker.cieid.logging.LogCollector;
 import org.keycloak.broker.provider.BrokeredIdentityContext;
 import org.keycloak.broker.provider.IdentityBrokerException;
 import org.keycloak.broker.provider.IdentityProvider;
@@ -623,6 +624,10 @@ public class CieIdSAMLEndpoint {
                 event.error(Errors.INVALID_SAML_RESPONSE);
                 return ErrorPage.error(session, null, Response.Status.BAD_REQUEST, Messages.INVALID_FEDERATED_IDENTITY_ACTION);
             }
+            
+            // Log scopo conservazione AGID
+            LogCollector.logDocument(holder.getSamlDocument());
+            
             StatusResponseType statusResponse = (StatusResponseType)holder.getSamlObject();
             // validate destination
             if (isDestinationRequired()
