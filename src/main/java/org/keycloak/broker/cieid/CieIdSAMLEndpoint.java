@@ -21,7 +21,7 @@ import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
-import org.keycloack.broker.cieid.logging.LogCollector;
+import org.keycloak.broker.cieid.logging.LogCollector;
 import org.keycloak.broker.provider.BrokeredIdentityContext;
 import org.keycloak.broker.provider.IdentityBrokerException;
 import org.keycloak.broker.provider.IdentityProvider;

@@ -17,7 +17,7 @@
 package org.keycloak.broker.cieid;
 
 import org.jboss.logging.Logger;
-import org.keycloack.broker.cieid.logging.LogCollector;
+import org.keycloak.broker.cieid.logging.LogCollector;
 import org.keycloak.broker.provider.AbstractIdentityProvider;
 import org.keycloak.broker.provider.AuthenticationRequest;
 import org.keycloak.broker.provider.BrokeredIdentityContext;
